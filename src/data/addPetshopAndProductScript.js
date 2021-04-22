@@ -1,6 +1,6 @@
 require('dotenv/config');
 const Petshop = require('../models/petshop');
-const Produto = require('../models/produto');
+const Product = require('../models/product');
 const { createRecipient } = require('../services/pagarme');
 const petshopData = require('./initial-petfood-bulk.json');
 
@@ -15,7 +15,7 @@ const addPetshopsAndProducts = async () => {
           ...petshop,
           recipient_id: recipient.data.id,
         }).save();
-        await Produto.insertMany(
+        await Product.insertMany(
           // eslint-disable-next-line no-underscore-dangle
           petshop.products.map((p) => ({ ...p, petshop_id: newPetshop._id })),
         );
